@@ -7,17 +7,43 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Enter Your Name for a Personalized Joke</h1>
-    
-    <form action="/get-joke" method="POST">
-        <input type="text" name="name" placeholder="Enter your name" required>
-        <button type="submit">Get Joke</button>
-    </form>
 
-    <% if (joke) { %>
-        <h2>Here's your joke, <%= name %>:</h2>
-        <p><%= joke %></p>
-    <% } %>
+    <div class="container">
+        <h2>😂 Random Joke Generator</h2>
+        
+        <form action="/get-joke" method="GET">
+            <label for="category">Choose Category:</label>
+            <select name="category" id="category">
+                <option value="Any">Any</option>
+                <option value="Programming">Programming</option>
+                <option value="Misc">Misc</option>
+                <option value="Dark">Dark</option>
+                <option value="Pun">Pun</option>
+                <option value="Spooky">Spooky</option>
+                <option value="Christmas">Christmas</option>
+            </select>
+
+            <label for="type">Choose Joke Type:</label>
+            <select name="type" id="type">
+                <option value="">Any</option>
+                <option value="single">Single (One-liner)</option>
+                <option value="twopart">Two-part Joke</option>
+            </select>
+
+            <button type="submit">Get Joke</button>
+        </form>
+
+        <% if (joke) { %>
+            <div class="joke">
+                <% if (joke.type === "single") { %>
+                    <p><%= joke.joke %></p>
+                <% } else { %>
+                    <p><strong>Setup:</strong> <%= joke.setup %></p>
+                    <p><strong>Punchline:</strong> <%= joke.delivery %></p>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
 
 </body>
 </html>

@@ -1,39 +1,33 @@
 
 import express from "express";
-import axios from "axios";
+import axios from "axios"; // For API requests
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(express.urlencoded({ extended: true })); // To read form data
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-// Home Route
+
+// Route to render the main page
 app.get("/", (req, res) => {
-  res.render("index", { joke: null, name: "" });
+    res.render("index", { joke: null });
 });
 
-// Handle Form Submission
-app.post("/get-joke", async (req, res) => {
-  try {
-    const userName = req.body.name || "Chuck Norris"; // Default name
-    const response = await axios.get("https://v2.jokeapi.dev/joke/Any?format=json");
+// Route to fetch jokes from the API based on user selection
+app.get("/get-joke", async (req, res) => {
+    try {
+        const category = req.query.category || "Any";
+        const type = req.query.type ? `&type=${req.query.type}` : "";
+        const apiUrl = `https://v2.jokeapi.dev/joke/${category}?${type}`;
 
-    let joke;
-    if (response.data.type === "single") {
-      joke = response.data.joke.replace(/Chuck Norris/g, userName);
-    } else {
-      joke = `${response.data.setup} ${response.data.delivery}`.replace(/Chuck Norris/g, userName);
+        const response = await axios.get(apiUrl);
+        const joke = response.data;
+
+        res.render("index", { joke });
+    } catch (error) {
+        console.error("Error fetching joke:", error);
+        res.render("index", { joke: { joke: "Failed to load joke. Try again!" } });
     }
-
-    res.render("index", { joke, name: userName });
-  } catch (error) {
-    res.render("index", { joke: "Oops! Couldn't fetch a joke.", name: "" });
-  }
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

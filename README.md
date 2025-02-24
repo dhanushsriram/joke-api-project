@@ -1,46 +1,45 @@
-🃏 Joke API Website - Personalized Jokes
-A fun and interactive website that generates a personalized joke for users based on their name! Built using Node.js, Express.js, Axios, and EJS, this project fetches jokes from the JokeAPI and presents them in a colorful and engaging UI.
+Joke Generator App
+A simple web application that fetches random jokes from the JokeAPI and displays them in a user-friendly interface.
 
-🚀 Features
-✅ Fetches a random joke from the JokeAPI
-✅ Allows users to enter their name for a personalized touch
-✅ Uses Express.js for the backend and Axios for API requests
-✅ Styled with CSS for a fun and vibrant design
-✅ Fully responsive for both desktop and mobile screens
+🛠 Features
+✅ Fetches random jokes from JokeAPI
+✅ Supports single-line and two-part jokes
+✅ User can select joke categories (e.g., programming, dark, pun, etc.)
+✅ Dynamic UI updates without refreshing the page
+✅ Minimalist and responsive design
 
-📂 Project Structure
+📌 Tech Stack
+Frontend: HTML, CSS, JavaScript, EJS (Embedded JavaScript)
+Backend: Node.js, Express.js
+API: JokeAPI
+Package Manager: npm
+HTTP Requests: Axios
+🚀 Installation & Setup
+1️⃣ Clone the repository
 
-/joke-api-website
-│── public/             # Static files (CSS, Images)
-│── views/              # EJS Templates
-│   ├── index.ejs       # Main page template
-│── routes/             # Express routes
-│── app.js (or index.js)  # Main server file
-│── package.json        # Dependencies and scripts
-│── README.md           # Project documentation
-
-🛠 Installation & Setup
-1️⃣ Clone the Repository
-git clone https://github.com/YOUR-USERNAME/joke-api-website.git
-cd joke-api-website
-
-2️⃣ Install Dependencies
+git clone https://github.com/yourusername/joke-generator.git
+cd joke-generator
+2️⃣ Install dependencies
 npm install
 
-3️⃣ Start the Server
-nodemon index.js
+3️⃣ Run the application
+node index.js
 
-Now, visit http://localhost:3000 in your browser!
+The app will run at: http://localhost:3000/
 
-📌 Technologies Used
-Node.js - Backend runtime
-Express.js - Web framework
-Axios - HTTP client for API requests
-JokeAPI - API for fetching jokes
-EJS - Template engine for dynamic HTML
-CSS - Styling for a fun and colorful design
-🤝 Contributing
-If you’d like to improve this project, feel free to fork the repository and submit a pull request!
+📌 API Integration
+The app fetches jokes from JokeAPI using Axios:
+
+
+const response = await axios.get("https://v2.jokeapi.dev/joke/Any?type=twopart");
+const joke = response.data;
+This retrieves a random joke with a setup and punchline.
+
+
+🛠 Future Enhancements
+🔹 Add favorite jokes feature
+🔹 Allow users to filter jokes by category
+🔹 Implement dark mode for better UI
 
 📜 License
-This project is open-source and free to use.
+This project is open-source and available under the MIT License.
