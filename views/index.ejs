@@ -37,10 +37,12 @@
             <div class="joke">
                 <% if (joke.type === "single") { %>
                     <p><%= joke.joke %></p>
-                <% } else { %>
+                <% } else if(joke.type === "twopart"){ %>
                     <p><strong>Setup:</strong> <%= joke.setup %></p>
                     <p><strong>Punchline:</strong> <%= joke.delivery %></p>
-                <% } %>
+                    <% } else { %>
+                        <p style="color: red;"><%= joke.joke %></p> <!-- Display error message -->
+                    <% } %>
             </div>
         <% } %>
     </div>
