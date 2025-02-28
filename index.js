@@ -22,13 +22,7 @@ app.get("/get-joke", async (req, res) => {
 
         const response = await axios.get(apiUrl);
         const joke = response.data;
-
-        // If no joke is found, send an error message instead
-        if (joke.error || !joke.joke && !joke.setup) {
-            return res.render("index", { joke: { joke: "No jokes found! Try changing categories." } });
-        }
-
-        res.render("index", { joke });
+          res.render("index", { joke });
     } catch (error) {
         console.error("Error fetching joke:", error);
         res.render("index", { joke: { joke: "No jokes found! Try changing categories or types." } });
